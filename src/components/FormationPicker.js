@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, StyleSheet, Text, Pressable, Modal, FlatList } from 'react-native';
-import { TextInput } from 'react-native';
-import playersData from '../../assets/data/players.json';
-import PlayerCard from './PlayerCard';
+import { View, Image, StyleSheet, Text, Pressable } from 'react-native';
+import PlayersModal from './PlayersModal';
 
-export default function FormationPicker({ formationSelected }) {
+export default function FormationPicker({ formationSelected, selectedPlayers = {}, players, setSelectedPlayers }) {
     const [stars, setStars] = useState([]);
     const [selectedInput, setSelectedInput] = useState(null);
     const [modalVisible, setModalVisible] = useState(false);
     const [playerSearched, setPlayerSearched] = useState([]);
-    const [players, setPlayers] = useState([]);
     const [input, setInput] = useState('');
     const [playerPost, setplayerPost] = useState();
-    const [selectedPlayers, setSelectedPlayers] = useState({});
 
     useEffect(() => {
         formationSelected && generateStars();
-        setPlayers(playersData);
         setSelectedPlayers({})
     }, [formationSelected]);
 
@@ -60,7 +55,7 @@ export default function FormationPicker({ formationSelected }) {
             const filteredPlayers = players.filter((player) =>
                 (player.nom.toUpperCase().includes(text.toUpperCase()) ||
                     player.prenom.toUpperCase().includes(text.toUpperCase())) &&
-                !Object.values(selectedPlayers)?.filter((playersInBlock) => playersInBlock.includes(player.id)).length > 0 &&
+                !Object?.values(selectedPlayers)?.filter((playersInBlock) => playersInBlock.includes(player.id)).length > 0 &&
                 player.post.toUpperCase() == playerPost.toUpperCase()
             );
             setPlayerSearched(filteredPlayers)
@@ -98,11 +93,11 @@ export default function FormationPicker({ formationSelected }) {
         setModalVisible(false);
         const selectedPlayersForInput = selectedPlayers[selectedInput] || [];
 
-        const playerSelectedInOtherBlock = Object.values(selectedPlayers)
-            .filter((playersInBlock) => playersInBlock.includes(playerId))
+        const playerSelectedInOtherBlock = Object?.values(selectedPlayers)
+            ?.filter((playersInBlock) => playersInBlock.includes(playerId))
             .length > 0;
 
-        const selectedPlayersCount = Object.values(selectedPlayers).reduce(
+        const selectedPlayersCount = Object?.values(selectedPlayers)?.reduce(
             (total, playersInBlock) => total + playersInBlock.length,
             0
         );
@@ -118,7 +113,7 @@ export default function FormationPicker({ formationSelected }) {
 
     const handleDeletePlayerBlock = (playerId) => {
         const updatedSelectedPlayers = { ...selectedPlayers };
-        Object.keys(updatedSelectedPlayers).forEach((key) => {
+        Object?.keys(updatedSelectedPlayers)?.forEach((key) => {
             const updatedPlayersInBlock = updatedSelectedPlayers[key].filter((id) => id !== playerId);
             updatedSelectedPlayers[key] = updatedPlayersInBlock;
         });
@@ -157,44 +152,18 @@ export default function FormationPicker({ formationSelected }) {
                     </View>
                 ))}
             </View>
-            <Modal
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    setModalVisible(false);
-                }}>
-                <View style={styles.modalContainer}>
-                    <View style={styles.modalContent}>
-                        <Text style={styles.modalHeader}>Rechercher des joueurs</Text>
-                        <TextInput
-                            onChangeText={onChangeText}
-                            value={input}
-                            style={styles.input}
-                            placeholder={selectedPlayers[selectedInput]?.length == 3 ? "le maximum est de 3 joueurs, supprimez-en un pour ajouter " : 'trouver un joueur'}
-                            editable={selectedPlayers[selectedInput]?.length == 3 ? false : true}
-                        />
-                        {input && playerSearched.length > 0 ? (
-                            <FlatList
-                                data={playerSearched}
-                                renderItem={({ item, index }) => getItemText(item, index)}
-                                keyExtractor={(item) => `${item.id}`}
-                            />
-                        ) : null}
-                        <Text style={styles.modalHeader}>Les joueurs de bloc </Text>
-                        {!selectedPlayers[selectedInput] && <Text>Aucun joueur dans cette bloc </Text>}
-                        {
-                            selectedPlayers[selectedInput]?.map((playerId, index) => (
-                                players.map((player, index) => {
-                                    if (player.id === playerId) {
-                                        return <PlayerCard index={index} player={player} handleDeletePlayerBlock={handleDeletePlayerBlock} />
-                                    }
-                                })
-                            ))
-                        }
-                    </View>
-                </View>
-            </Modal>
+            <PlayersModal
+                modalVisible={modalVisible}
+                setModalVisible={setModalVisible}
+                onChangeText={onChangeText}
+                input={input}
+                selectedInput={selectedInput}
+                selectedPlayers={selectedPlayers}
+                playerSearched={playerSearched}
+                getItemText={getItemText}
+                players={players}
+                handleDeletePlayerBlock={handleDeletePlayerBlock}
+            />
         </View>
     );
 }
@@ -226,24 +195,6 @@ const styles = StyleSheet.create({
         color: 'red',
         fontSize: 38,
         padding: 20,
-    },
-    modalContainer: {
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)'
-    },
-    modalContent: {
-        backgroundColor: 'white',
-        padding: 20,
-        borderRadius: 10,
-        width: '90%',
-        marginTop: 50
-    },
-    modalHeader: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 10,
-        textAlign: 'center'
     },
     avatarContainer: {
         marginRight: 10,

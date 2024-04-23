@@ -1,10 +1,12 @@
-import { StyleSheet, TextInput, View } from 'react-native'
+import { StyleSheet, TextInput, View, Pressable, Text } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { Picker } from '@react-native-picker/picker';
 
 import yearsData from '../../assets/data/years.json';
 import formationsData from '../../assets/data/formations.json';
+import playersData from '../../assets/data/players.json';
 import FormationPicker from '../components/FormationPicker';
+import Lineup from '../components/Lineup';
 
 export default function FormationScreen() {
     const [selectedFormation, setselectedFormation] = useState()
@@ -12,12 +14,13 @@ export default function FormationScreen() {
     const [playerCount, setplayerCount] = useState()
     const [yearsSelected, setyearsSelected] = useState()
     const [formatName, setformatName] = useState()
-
+    const [selectedPlayers, setSelectedPlayers] = useState({});
+    const [players, setPlayers] = useState([]);
 
     useEffect(() => {
         setFormations(formationsData)
+        setPlayers(playersData);
     }, []);
-
 
     if (!formations?.length) return null;
 
@@ -51,20 +54,23 @@ export default function FormationScreen() {
                     ))}
                 </Picker>
             </View>
-            <Picker
-                style={styles.singlePicker}
-                selectedValue={selectedFormation}
-                onValueChange={(itemValue) => setselectedFormation(itemValue)}
-            >
-                <Picker.Item label="Shema" value="" />
-                {formations.map((formation) => (
-                    formation.nbr === playerCount &&
-                    formation?.system_play.map(ftn => (
-                        <Picker.Item key={ftn.id} label={ftn.label} value={ftn.label} />
-                    ))
-                ))}
-            </Picker>
-            <FormationPicker formationSelected={selectedFormation} />
+            <View style={styles.row}>
+                <Picker
+                    style={styles.picker}
+                    selectedValue={selectedFormation}
+                    onValueChange={(itemValue) => setselectedFormation(itemValue)}
+                >
+                    <Picker.Item label="Shema" value="" />
+                    {formations.map((formation) => (
+                        formation.nbr === playerCount &&
+                        formation?.system_play.map(ftn => (
+                            <Picker.Item key={ftn.id} label={ftn.label} value={ftn.label} />
+                        ))
+                    ))}
+                </Picker>
+                <Lineup playersData={players} formatName={formatName} yearsSelected={yearsSelected} playerCount={playerCount} formationSelected={selectedFormation} selectedPlayers={selectedPlayers} />
+            </View>
+            <FormationPicker players={players} setPlayers={setPlayers} formationSelected={selectedFormation} selectedPlayers={selectedPlayers} setSelectedPlayers={setSelectedPlayers} />
         </View>
     );
 }
@@ -95,5 +101,5 @@ const styles = StyleSheet.create({
         width: '100%',
         borderWidth: 1,
         padding: 10,
-    },
+    }
 });
