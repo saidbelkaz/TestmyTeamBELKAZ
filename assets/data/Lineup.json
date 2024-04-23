@@ -1,0 +1,17 @@
+{
+    "id": 217,
+    "nom": "TEST",
+    "plan": "{\"blocks\":[{\"block\":1,\"positions\":[{\"poste\":\"poste-1\",\"players\":[{\"club_id\":16445,\"club\":\"Arsenal\",\"club_logo\":\"https://interface.myteambyfrmf.ma/uploads/Europe/england/arsenal.png\",\"user_id\":231,\"nom\":\"ashley\",\"num\":\"\",\"post\":\"AG\",\"pied\":\"gaucher\",\"id\":3477,\"date_naiss\":\"1980-12-20\",\"prenom\":\"cole\",\"img\":\"https://pro-api.myteam.solutions/uploads/image-1713355918223.png\"},{\"club_id\":15183,\"club\":\"Real Madrid II\",\"club_logo\":\"https://interface.myteambyfrmf.ma/uploads/Europe/spain/Real Madrid II9575.png\",\"user_id\":231,\"nom\":\"Carlos\",\"num\":\"\",\"post\":\"AG\",\"pied\":\"droitier\",\"id\":4463,\"date_naiss\":\"1973-04-10\",\"prenom\":\"Roberto\",\"img\":\"https://pro-api.myteam.solutions/uploads/image-1713288222840.png\"}]}]},{\"block\":2,\"positions\":[{\"poste\":\"poste-1\",\"players\":[]},{\"poste\":\"poste-2\",\"players\":[]},{\"poste\":\"poste-3\",\"players\":[{\"club_id\":1830,\"club\":\"Raja Club Athletic\",\"club_logo\":\"https://interface.myteambyfrmf.ma/uploads/afrique/morocco/rca.png\",\"user_id\":231,\"nom\":\"Dolmy\",\"num\":\"8\",\"post\":\"MDF\",\"pied\":\"droitier\",\"id\":4339,\"date_naiss\":\"2005-08-05\",\"prenom\":\"Abdelmajid\",\"img\":\"https://pro-api.myteam.solutions/uploads/image-1713356562753.png\"},{\"club_id\":16452,\"club\":\"Tottenham\",\"club_logo\":\"https://interface.myteambyfrmf.ma/uploads/Europe/england/tottenham.png\",\"user_id\":231,\"nom\":\"Naybet\",\"num\":\"\",\"post\":\"DC\",\"pied\":\"droitier\",\"id\":3356,\"date_naiss\":\"1970-02-10\",\"prenom\":\"Noureddine\",\"img\":\"https://pro-api.myteam.solutions/uploads/image-1713287836020.png\"},{\"club_id\":15002,\"club\":\"Real Madrid\",\"club_logo\":\"https://interface.myteambyfrmf.ma/uploads/Europe/spain/Real%20Madrid%20II9575.png\",\"user_id\":231,\"nom\":\"Ronaldo\",\"num\":\"9\",\"post\":\"AA\",\"pied\":\"droitier\",\"id\":5113,\"date_naiss\":\"1976-09-18\",\"prenom\":\"luís nazário\",\"img\":\"https://pro-api.myteam.solutions/uploads/image-1713369823381.png\"}]},{\"poste\":\"poste-4\",\"players\":[]}]},{\"block\":3,\"positions\":[{\"poste\":\"poste-1\",\"players\":[]},{\"poste\":\"poste-2\",\"players\":[]},{\"poste\":\"poste-3\",\"players\":[]},{\"poste\":\"poste-4\",\"players\":[]},{\"poste\":\"poste-5\",\"players\":[]}]},{\"block\":4,\"positions\":[{\"poste\":\"poste-1\",\"players\":[]}]}],\"blocks_h\":4}",
+    "schema": "541",
+    "playercount": 11,
+    "nbrplayer": 5,
+    "years": "\"[]\"",
+    "zoom": 75,
+    "created_id": "231",
+    "created_at": "2024-04-22 12:57:46",
+    "updated_at": "2024-04-22 13:12:57.585158",
+    "deleted_at": null,
+    "bg": "bg.svg",
+    "authorities": 0,
+    "trash_id": null
+}
